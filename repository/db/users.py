@@ -39,17 +39,20 @@ class UsersDb:
             raise UsersDbError(e)
 
     #Seleciona usuario
-    def select(self, id:int) -> dict:
+    def select(self, search:Literal["email", "id"], value:int|str) -> dict:
 
         try:
         
                     logger.info(f"buscando usuario...")
+
+                    sql = {"id": "select * from users u inner join conversation c on c.user_id = u.id where id = :search", 
+                           "email": "select * from users where email = :search"}
         
                     with self.eng.begin() as session:
         
                         result = session.execute(
-                            text("select * from users u inner join conversation c on c.user_id = u.id where id = :id"),
-                            {"id":id}
+                            text(sql[search]),
+                            {"search":value}
                         )
         
                     return result.mappings().fetchone()
@@ -60,7 +63,7 @@ class UsersDb:
                     raise UsersDbError(e)
 
     #Atualiza senha ou nome
-    def update(self, Set:Literal["name"], value:str, id:int) -> dict:
+    def update(self, Set:Literal["name", "password"], value:str, id:int) -> dict:
 
          try:
          
