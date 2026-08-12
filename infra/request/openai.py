@@ -7,7 +7,7 @@ from openai import OpenAI
 
 class Response:
 
-    def __init__(self, key:str, mensage:str, prompt:str)-> None:
+    def __init__(self, mensage:str, prompt:str, key:str=None)-> None:
 
         
         self.msg = mensage
