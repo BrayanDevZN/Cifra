@@ -32,7 +32,7 @@ class InitDb:
 
         self.tables = tables
 
-        if self.table:
+        if self.tables:
             logger.info(f"Criando {" ,".join(self.tables)}...")
 
 
@@ -64,7 +64,7 @@ class InitDb:
                                 id serial primary key,
                                 conversation_id int references conversation(id),
                                 action text not null,
-                                created_at timestamp default not null
+                                created_at timestamp default current_timestamp
                                 )
 
                             """,
