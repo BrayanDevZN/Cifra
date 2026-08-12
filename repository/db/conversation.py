@@ -80,12 +80,12 @@ class ConversationDb:
                      logger.error(e)
                      raise ConversationDbError(e)
 
-    #Deleta usuario
+    #Deleta chat
     def delete(self, id:int) -> None:
 
           try:
                    
-                              logger.info(f"Deletando usuario...")
+                              logger.info(f"Deletando chat...")
                    
                               with self.eng.begin() as session:
                    
