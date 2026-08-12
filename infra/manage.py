@@ -32,6 +32,9 @@ class ResponseOpenAI:
 #Pega a configuração de cor
 from infra.core.color import Cor
 
+
+#Configurações de prompt
+from infra.core.skills import SECURITY, CMD, MANAGER
     
 
     
