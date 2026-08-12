@@ -24,6 +24,7 @@ class SessionJson:
                 json.dump({"token": token}, f, ensure_ascii=False)
 
         except Exception as e:
+            logger.error(e)
             raise Exception(e)
 
     #Le
@@ -46,6 +47,7 @@ class SessionJson:
             return data["token"]
 
         except Exception as e:
+            logger.error(e)
 
             raise Exception(e)
 
