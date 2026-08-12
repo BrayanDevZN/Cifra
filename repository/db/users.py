@@ -48,7 +48,7 @@ class UsersDb:
                     with self.eng.begin() as session:
         
                         result = session.execute(
-                            text("select * from users where id = :id"),
+                            text("select * from users u inner join conversation c on c.user_id = u.id where id = :id"),
                             {"id":id}
                         )
         

@@ -39,7 +39,7 @@ class ConversationDb:
             raise ConversationDbError(e)
 
     #Seleciona o chat
-    def select(self, id:int) -> dict:
+    def select(self, user_id:int) -> dict:
 
         try:
         
@@ -48,8 +48,8 @@ class ConversationDb:
                     with self.eng.begin() as session:
         
                         result = session.execute(
-                            text("select * from conversation where id = :id"),
-                            {"id":id}
+                            text("select * from conversation where user_id = :user_id"),
+                            {"user_id":user_id}
                         )
         
                     return result.mappings().fetchone()
