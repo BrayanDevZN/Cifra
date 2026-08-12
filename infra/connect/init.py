@@ -22,7 +22,7 @@ class InitDb:
         self.inspector = inspect(engine)
 
         #Tabelas do banco
-        self.tables = ["conversation", "actions", "chats"]
+        self.tables = ["users", "conversation", "actions", "chats"]
 
 
     #Deixa só as tabelas que ainda n existem em self.table
@@ -41,10 +41,21 @@ class InitDb:
 
         try:
 
-            sql = {"conversation": """
+            sql = {"users": """
+                                create table if not exists users(
+                                id serial primary key,
+                                name text not null,
+                                email text not null,
+                                password text not null,
+                                created_at timestamp default current_timestamp
+                                )
+                            """,
+
+                "conversation": """
                             create table if not exists conversation(
                             id serial primary key,
-                            name text not null
+                            user_id int references users(id),
+                            name text not null,
                             created_at timestamp default current_timestamp
                             )
                         """,
