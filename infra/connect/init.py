@@ -54,27 +54,30 @@ class InitDb:
                 "conversation": """
                             create table if not exists conversation(
                             id serial primary key,
-                            user_id int references users(id),
+                            user_id int,
                             name text not null,
-                            created_at timestamp default current_timestamp
+                            created_at timestamp default current_timestamp,
+                            foreign key (user_id) references users(id) on delete cascade
                             )
                         """,
                         "actions": """
                                 create table if not exists actions(
                                 id serial primary key,
-                                conversation_id int references conversation(id),
+                                conversation_id int,
                                 action text not null,
-                                created_at timestamp default current_timestamp
+                                created_at timestamp default current_timestamp,
+                                foreign key (conversation_id) references conversation(id) on delete cascade
                                 )
 
                             """,
                         "chats":"""
                                     create table if not exists chats(
                                     id serial primary key,
-                                    conversation_id int references conversation(id),
+                                    conversation_id int,
                                     role text not null,
                                     mensage text not null,
-                                    created_at timestamp default current_timestamp
+                                    created_at timestamp default current_timestamp,
+                                    foreign key (conversation_id) references conversation(id) on delete cascade
                                     )
                                 """
                         }
