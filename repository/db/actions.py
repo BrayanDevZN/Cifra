@@ -10,7 +10,7 @@ from sqlalchemy import text, Engine
 class ActionsDbError(Exception):
     pass
 
-class ConversationDb:
+class ActionsDb:
 
     def __init__(self, engine:Engine)-> None:
 

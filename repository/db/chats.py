@@ -10,7 +10,7 @@ from typing import Literal
 class ChatsDbError(Exception):
     pass
 
-class ConversationDb:
+class ChatsDb:
 
     def __init__(self, engine:Engine)-> None:
 
