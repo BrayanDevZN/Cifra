@@ -45,14 +45,11 @@ class UsersDb:
         
                     logger.info(f"buscando usuario...")
 
-                    sql = {"id": "select * from users u inner join conversation c on c.user_id = u.id where id = :search", 
-                           "email": "select * from users where email = :search"}
-        
                     with self.eng.begin() as session:
         
                         result = session.execute(
-                            text(sql[search]),
-                            {"search":value}
+                            text("select * from users where :search = :value"),
+                            {"search":search, "value":value}
                         )
         
                     return result.mappings().fetchone()

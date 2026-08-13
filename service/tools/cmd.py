@@ -9,23 +9,26 @@ import subprocess
 class CmdToolError(Exception):
     pass
 
+
+
+    
 def cmd_tool(comand:str) -> str|None:
 
-    try:
+        try:
 
-        logger.info(f"Executando comando: {comand}...")
+            logger.info(f"Executando comando: {comand}...")
 
-        result = subprocess.run(
-            comand,
-            shell=True,
-            capture_output=True,
-            text=True,
-            check=True
-        )
+            result = subprocess.run(
+                comand,
+                shell=True,
+                capture_output=True,
+                text=True,
+                check=True
+            )
 
-        return result.stdout.strip()
+            return result.stdout.strip()
 
-    except Exception as e:
-        logger.error(e)
-        raise CmdToolError(e)
+        except Exception as e:
+            logger.error(e)
+            raise CmdToolError(e)
 

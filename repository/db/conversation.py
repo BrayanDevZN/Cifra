@@ -18,7 +18,7 @@ class ConversationDb:
 
 
     #Insere na tabela
-    def insert(self, user_id:int, name:str) -> dict:
+    def insert(self, user_id:int, name:str, permission:Literal["total", "partial", "none"]) -> dict:
 
         try:
 
@@ -27,8 +27,8 @@ class ConversationDb:
             with self.eng.begin() as session:
 
                 result = session.execute(
-                    text("insert into conversation(user_id, name) values (:user_id, :name) returning id, name"),
-                    {"user_id":user_id,"name":name}
+                    text("insert into conversation(user_id, name, permission) values (:user_id, :name, :permission) returning id, name"),
+                    {"user_id":user_id,"name":name, "permission":permission}
                 )
 
             return result.mappings().fetchone()
@@ -60,17 +60,21 @@ class ConversationDb:
                     raise ConversationDbError(e)
 
     #Atualiza nome
-    def update(self, name:str, id:int) -> dict:
+    def update(self, Set:Literal["name", "permission"], id:int, value:str) -> dict:
 
          try:
          
-                    logger.info(f"Atualizando chat para {name}...")
+                    logger.info(f"Atualizando {Set} para {value}...")
+
+                    
          
                     with self.eng.begin() as session:
          
                          result = session.execute(
-                             text("update conversation set name = :name where id = :id"),
-                             {"name":name,  "id":id}
+                             text("update conversation set :Set = :value where id = :id"),
+                             
+                                {"Set": Set, "value":value, "id":id}
+                                                          
                          )
          
                     return result.mappings().fetchone()

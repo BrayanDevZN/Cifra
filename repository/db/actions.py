@@ -4,7 +4,7 @@ from logs.log import logger
 """
 mexe na tabela actions
 """
-
+from typing import Literal
 from sqlalchemy import text, Engine
 
 class ActionsDbError(Exception):

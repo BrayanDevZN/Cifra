@@ -23,7 +23,7 @@ def read(config:dict) -> str:
 
             result = f.read()
 
-        return result
+        return str(result)
 
     except Exception as e:
         logger.error(e)
