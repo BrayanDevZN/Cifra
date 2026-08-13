@@ -4,11 +4,14 @@ Le todos os prompts e salva em suas variaveis
 
 try:
     from repository.manage import read
-    from infra.manage import CMD, MANAGER, SECURITY
+    from infra.manage import CMD, MANAGER, SECURITY, CODE
+
+
 
     CMD["content"] = read(CMD)
     MANAGER["content"] = read(MANAGER)
     SECURITY["content"] = read(SECURITY)
+    CODE["content"] = read(CODE)
 
 
     #Classe que vai carregar os prompt para outras partes do codigo

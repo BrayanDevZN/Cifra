@@ -28,9 +28,12 @@ class CmdAgent:
     def _cmd(self) -> None:
 
         view = Cor().ciano(f"Cifra: Executando comando '{self.response}'...")
-        print(f"\r{view}", end="")
-
+        print(f"\033[s\r{view}", end="", flush=True)
+        
         self.comand = cmd_tool(comand=self.response)
+
+        print("\033[u\033[J", end="", flush=True)
+        
 
     #Salva a ação
     def _save(self) -> None:

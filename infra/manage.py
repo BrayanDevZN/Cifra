@@ -34,7 +34,7 @@ from infra.core.color import Cor
 
 
 #Configurações de prompt
-from infra.core.skills import SECURITY, CMD, MANAGER
+from infra.core.skills import SECURITY, CMD, MANAGER, CODE
     
 
     
